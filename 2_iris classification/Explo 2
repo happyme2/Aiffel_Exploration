@@ -1,0 +1,35 @@
+#(1) 필요한 모듈 import 하기
+from sklearn.datasets import load_digits
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report
+
+#(2) 데이터 준비
+digits = load_digits()
+digits_data = digits.data
+digits_label = digits.target
+
+#(3) 데이터 이해하기 
+
+digits_data = digits.data             #feature data 지정
+
+
+digits_label = digits.target          #label data 지정
+
+print('"target name은 %s 입니다."' %digits.target_names)            #target names 출력  
+print("\n")
+
+
+#(4) train, test 데이터 분리 
+# 모델 학습과 테스트용 문제지와 정답지 준비 
+X_train, X_test, y_train, y_test = train_test_split (digits_data,
+                                                    digits_label,
+                                                    test_size = 0.2,
+                                                    random_state=7)
+
+#(5) 모델 학습 - X_train, y_train 활용하여 분류기 모델 만들기 / 성능 체크
+decision_tree = DecisionTreeClassifier(random_state = 32)
+decision_tree.fit(X_train,y_train)
+y_pred= decision_tree.predict(X_test)
+
+print(classification_report(y_test,y_pred))
