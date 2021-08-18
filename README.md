@@ -1,1 +1,1 @@
-Aiffel_Exploration
+Exploration
